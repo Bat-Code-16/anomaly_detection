@@ -36,7 +36,7 @@ def make_deviceid_dict(df: pd.DataFrame, unique:int):
         filtered_df = df[df["DeviceID"] == device_id]
         
         # Use the device ID as the key in the dictionary
-        device_list[f"device_{device_id}"] = filtered_df
+        device_list[device_id] = filtered_df
 
     return [unique_device, device_list]
 

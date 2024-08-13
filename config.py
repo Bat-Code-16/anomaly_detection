@@ -8,11 +8,7 @@ db_params1 = {     # ele database connection
     "password": "analyst**",
     "host": "rdpms.in",
     "port": "5432"
-    # "dbname": "ele",
-    # "user": "postgres",
-    # "password": "indian@1601",
-    # "host": "localhost",
-    # "port": "5432"
+
 }
 
 def date_to_ts(start_date,end_date):
@@ -20,16 +16,16 @@ def date_to_ts(start_date,end_date):
     te=(end_date.timestamp())*1000,
     return ts, te
 
-# def get_data(cursor):
-#     get_data_sql="""
-#     SELECT * 
-#     FROM
-#         public.history
-#     LIMIT 100
-#     """
-#     cursor.execute(get_data_sql)
-#     rows=cursor.fetchall()
-#     return rows
+def get_data(cursor):
+    get_data_sql="""
+    SELECT * 
+    FROM
+        public.history
+    LIMIT 100
+    """
+    cursor.execute(get_data_sql)
+    rows=cursor.fetchall()
+    return rows
 
 def get_data(cursor, ts, tt):
 #     get_data_sql = """
@@ -103,37 +99,37 @@ def get_data(cursor, ts, tt):
     
     return df_pivot
 
-# def main():
+def main():
     
-#     conn = cursor = None
-#     start_date=datetime(2024, 7, 30)
-#     end_date=datetime(2024, 8, 1)
-#     try:
-#         conn = psycopg2.connect(**db_params1)
-#         cursor = conn.cursor()
-#         print("ele connected")
+    conn = cursor = None
+    start_date=datetime(2024, 7, 30)
+    end_date=datetime(2024, 8, 1)
+    try:
+        conn = psycopg2.connect(**db_params1)
+        cursor = conn.cursor()
+        print("ele connected")
         
-#         ts,tt=date_to_ts(start_date,end_date)
-#         #Fetch the data for the specified time range
-#         df = get_data(cursor, ts, tt)
+        ts,tt=date_to_ts(start_date,end_date)
+        #Fetch the data for the specified time range
+        df = get_data(cursor, ts, tt)
 
-#         csv_file_path = "C:/Users/HP/Downloads/output_data1.csv"
+        csv_file_path = "C:/Users/HP/Downloads/output_data1.csv"
 
-#         df.to_csv(csv_file_path, index=False)  # Save DataFrame to CSV
+        df.to_csv(csv_file_path, index=False)  # Save DataFrame to CSV
         
-#         # print(get_data(cursor))
+        # print(get_data(cursor))
 
         
 
-#     except Exception as e:
-#         print(f"An error occurred: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
-#     finally:
-#         if cursor:
-#             cursor.close()
-#         if conn:
-#             conn.close()
+    finally:
+        if cursor:
+            cursor.close()
+        if conn:
+            conn.close()
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
 
